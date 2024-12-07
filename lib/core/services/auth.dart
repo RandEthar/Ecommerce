@@ -7,6 +7,13 @@ abstract class Auth {
     required String email,
     required String password,
   });
+  Future<void> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  });
+
+
+
 }
 
 class AuthImpl implements Auth {
@@ -30,5 +37,28 @@ class AuthImpl implements Auth {
     } catch (e) {
       throw (e.toString());
     }
+  }
+  
+  @override
+  Future<void> signInWithEmailAndPassword({required String email, required String password})async {
+    try {
+await firebaseAuth.signInWithEmailAndPassword(
+    email: email,
+    password: password
+  );
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'user-not-found') {
+    throw('No user found for that email.');
+  } else if (e.code == 'wrong-password') {
+    throw('Wrong password provided for that user.');
+  }else if (e.code == 'invalid-credential') {
+    throw('email or password is invalid');
+  }
+  else{
+        throw(e.toString());
+  }
+}catch(e){
+  throw(e.toString());
+}
   }
 }

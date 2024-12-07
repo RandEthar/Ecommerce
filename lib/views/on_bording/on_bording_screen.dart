@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/views/on_bording/widget/custom_appbar.dart';
-import 'package:ecommerce_app/views/on_bording/widget/dotis_Indecitor.dart';
-import 'package:ecommerce_app/views/on_bording/widget/on_bourding_screen_body.dart';
+import 'package:ecommerce_app/core/widget/custom_appbar.dart';
+import 'package:ecommerce_app/core/widget/dotis_Indecitor.dart';
+import 'package:ecommerce_app/core/widget/on_bourding_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

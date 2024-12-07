@@ -1,7 +1,8 @@
 import 'dart:developer';
 
+import 'package:ecommerce_app/core/services/auth.dart';
 import 'package:ecommerce_app/logic/signup/siginup_state.dart';
-import 'package:ecommerce_app/services/auth.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';

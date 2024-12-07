@@ -1,8 +1,9 @@
-import 'package:ecommerce_app/utils/app_colors.dart';
-import 'package:ecommerce_app/utils/app_styles.dart';
-import 'package:ecommerce_app/utils/constants.dart';
-import 'package:ecommerce_app/utils/shared_pref.dart';
-import 'package:ecommerce_app/views/on_bording/widget/custom_dots_indecatur.dart';
+
+import 'package:ecommerce_app/core/utils/app_colors.dart';
+import 'package:ecommerce_app/core/utils/app_styles.dart';
+import 'package:ecommerce_app/core/utils/constants.dart';
+import 'package:ecommerce_app/core/utils/shared_pref.dart';
+import 'package:ecommerce_app/core/widget/custom_dots_indecatur.dart';
 import 'package:ecommerce_app/views/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

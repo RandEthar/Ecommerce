@@ -1,5 +1,6 @@
-import 'package:ecommerce_app/utils/app_images.dart';
-import 'package:ecommerce_app/views/on_bording/widget/page_view_item.dart';
+
+import 'package:ecommerce_app/core/utils/app_images.dart';
+import 'package:ecommerce_app/core/widget/page_view_item.dart';
 import 'package:flutter/material.dart';
 
 class OnBordingScreenBody extends StatelessWidget {

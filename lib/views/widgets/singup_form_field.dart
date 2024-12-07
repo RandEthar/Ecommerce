@@ -1,5 +1,6 @@
+import 'package:ecommerce_app/core/utils/constants.dart';
 import 'package:ecommerce_app/logic/signup/siginup_cubit.dart';
-import 'package:ecommerce_app/utils/constants.dart';
+
 import 'package:ecommerce_app/views/widgets/custom_password_text_form_fild.dart';
 import 'package:ecommerce_app/views/widgets/custom_text_form_fild.dart';
 import 'package:flutter/material.dart';

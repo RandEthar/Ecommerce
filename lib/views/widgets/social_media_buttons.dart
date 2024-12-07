@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/utils/constants.dart';
+import 'package:ecommerce_app/core/utils/constants.dart';
+
 import 'package:ecommerce_app/views/widgets/social_media_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

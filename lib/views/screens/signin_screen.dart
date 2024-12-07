@@ -1,17 +1,11 @@
-
-import 'package:ecommerce_app/utils/app_styles.dart';
-import 'package:ecommerce_app/utils/constants.dart';
-import 'package:ecommerce_app/utils/font_weight_helper.dart';
-import 'package:ecommerce_app/utils/widgets/custom_button.dart';
-import 'package:ecommerce_app/views/screens/siginup_screen.dart';
-import 'package:ecommerce_app/views/widgets/create_an_account.dart';
-
-import 'package:ecommerce_app/views/widgets/forgot_password.dart';
-import 'package:ecommerce_app/views/widgets/or_continue_with.dart';
-import 'package:ecommerce_app/views/widgets/singin_form_field.dart';
-import 'package:ecommerce_app/views/widgets/social_media_buttons.dart';
+import 'package:ecommerce_app/core/utils/constants.dart';
+import 'package:ecommerce_app/logic/signin/sigin_state.dart';
+import 'package:ecommerce_app/logic/signin/signin_cubit.dart';
+import 'package:ecommerce_app/views/widgets/home/screen/home_screen.dart';
+import 'package:ecommerce_app/views/widgets/signin_body.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});
@@ -19,50 +13,24 @@ class SigninScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child:  Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                verticalSpace(19),
-                Text(
-                  "Welcome\n Back!",
-                  style: AppStyles.montserrat14SimeBold.copyWith(
-                    fontSize: 36.sp,
-                    fontWeight: FontWieghtHelper.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                verticalSpace(33),
-                const SinginFormField(),
-                verticalSpace(9),
-                const ForgotPassword(),
-                verticalSpace(52),
-              CustomButton(
-                  onPressed: () {
-                    
-                  },
-                  title: "Login",
-                ),
-                verticalSpace(75),
-                const ORContinueWth(),
-                verticalSpace(20),
-                const SocialMediaButtons(),
-                verticalSpace(28),
-               CreateAnAccount(title1: "Create An Account ",
-                title2: "Sign Up",onTap: () {
-            Navigator.pushNamed(context,SiginupScreen.routeName);
-          },)
-              ],
-            ),
-          ),
-        ),
+      body: BlocConsumer<SigninCubit, SiginState>(
+        listener: (context, state) {
+          if (state is SiginFailer) {
+         BuildError(context,state.message+"222");
+          }else if(state is SiginSuccess){
+         Navigator.pushReplacementNamed(context,HomeScreen.routename);
+          }
+        },
+        builder: (context, state) {
+          return ModalProgressHUD(
+            inAsyncCall: state is SiginLoading,
+            child: const Signinbody());
+        },
       ),
     );
   }
 }
+
+
 
 

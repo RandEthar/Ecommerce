@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:ecommerce_app/logic/signup/siginup_cubit.dart';
 import 'package:ecommerce_app/logic/signup/siginup_state.dart';
 import 'package:ecommerce_app/views/widgets/siginup_screen_body.dart';
@@ -14,20 +15,38 @@ class SiginupScreen extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<SiginupCubit, SiginupState>(
         listener: (context, state) {
-        if(state is SiginupFailer){
-          ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(content: Text(state.massage))
-          );
-        }else if(state is SiginupSuccess){
-           ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text('Signup Successful!'))
-  );
-        }
+          if (state is SiginupFailer) {
+            final snackBar = SnackBar(
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                behavior: SnackBarBehavior.fixed,
+                content: AwesomeSnackbarContent(
+                  title: 'falier',
+                  message: state.massage,
+                  contentType: ContentType.failure,
+                ));
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(snackBar);
+          } else if (state is SiginupSuccess) {
+            final snackBar = SnackBar(
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                behavior: SnackBarBehavior.floating,
+                content: AwesomeSnackbarContent(
+                  title: 'Successful',
+                  message: "Signup Successful!",
+                  contentType: ContentType.success,
+                ));
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(snackBar);
+          }
         },
         builder: (context, state) {
           return ModalProgressHUD(
-            inAsyncCall: state is SiginupLoading ,
-            child: const SiginupScreenBody());
+              inAsyncCall: state is SiginupLoading,
+              child: const SiginupScreenBody());
         },
       ),
     );

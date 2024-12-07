@@ -1,11 +1,12 @@
 
 
 
+import 'package:ecommerce_app/core/utils/app_styles.dart';
+import 'package:ecommerce_app/core/utils/constants.dart';
+import 'package:ecommerce_app/core/utils/font_weight_helper.dart';
+import 'package:ecommerce_app/core/utils/widgets/custom_button.dart';
 import 'package:ecommerce_app/logic/signup/siginup_cubit.dart';
-import 'package:ecommerce_app/utils/app_styles.dart';
-import 'package:ecommerce_app/utils/constants.dart';
-import 'package:ecommerce_app/utils/font_weight_helper.dart';
-import 'package:ecommerce_app/utils/widgets/custom_button.dart';
+
 import 'package:ecommerce_app/views/widgets/create_an_account.dart';
 import 'package:ecommerce_app/views/widgets/or_continue_with.dart';
 import 'package:ecommerce_app/views/widgets/public_offer.dart';
