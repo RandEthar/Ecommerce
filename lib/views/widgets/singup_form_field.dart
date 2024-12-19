@@ -26,10 +26,21 @@ class SingupFormField extends StatelessWidget {
                 return null;
               },
               controller: context.read<SiginupCubit>().emailController,
-              hint: "Username or Email",
+              hint: "Email",
               prefixIcon: "assets/svgs/User.svg",
             ),
             verticalSpace(31),
+             CustomTextFormFild(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your name';
+                }
+                return null;
+              },
+              controller: context.read<SiginupCubit>().nameController,
+              hint: "Username",
+              prefixIcon: "assets/svgs/User.svg",
+            ), verticalSpace(31),
             CustomPasswordTextFormFild(
                 validator: (value) {
                   if (value == null || value.isEmpty) {

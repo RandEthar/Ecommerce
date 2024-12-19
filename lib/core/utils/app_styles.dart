@@ -8,6 +8,10 @@ import 'package:flutter/material.dart';
 class AppStyles {
   //Libre Caslon Text
   //Montserrat
+
+  static TextStyle Libre_Caslon_Text18Bold=GoogleFonts.libreCaslonText(
+    fontWeight: FontWieghtHelper.bold,fontSize: 18,color: Color(0xff4392F9)
+   );
   static TextStyle libreCaslonText40Bold=GoogleFonts.libreCaslonText(
   fontWeight: FontWieghtHelper.bold,
    fontSize: 40.sp,color:  AppColors.primary
@@ -27,6 +31,10 @@ static TextStyle poppins14regular=GoogleFonts.montserrat(
 static TextStyle montserrat12medium=GoogleFonts.montserrat(
   fontWeight: FontWieghtHelper.medium,
    fontSize: 12.sp,color:const Color(0xff575757)
+  );
+  static TextStyle montserrat36Bold=GoogleFonts.montserrat(
+  fontWeight: FontWieghtHelper.bold,
+   fontSize: 36.sp,color:Colors.black
   );
 static TextStyle montserrat12regular=GoogleFonts.montserrat(
   fontWeight: FontWieghtHelper.regular,

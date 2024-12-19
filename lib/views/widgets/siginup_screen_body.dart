@@ -4,7 +4,7 @@
 import 'package:ecommerce_app/core/utils/app_styles.dart';
 import 'package:ecommerce_app/core/utils/constants.dart';
 import 'package:ecommerce_app/core/utils/font_weight_helper.dart';
-import 'package:ecommerce_app/core/utils/widgets/custom_button.dart';
+import 'package:ecommerce_app/core/utils/custom_button.dart';
 import 'package:ecommerce_app/logic/signup/siginup_cubit.dart';
 
 import 'package:ecommerce_app/views/widgets/create_an_account.dart';
@@ -42,7 +42,7 @@ class SiginupScreenBody extends StatelessWidget {
                 verticalSpace(33),
                const SingupFormField(),
                const   PublicOffer(),
-                     verticalSpace(52),CustomButton(title: "Create Account"
+                     verticalSpace(45),CustomButton(title: "Create Account"
                      ,onPressed: () {
                       print("rand");
                        if (context.read<SiginupCubit>().formkey.currentState!.validate()){

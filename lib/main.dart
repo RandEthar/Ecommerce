@@ -36,7 +36,7 @@ class EcommerceApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSwatch().copyWith(
             primary: AppColors.primary.withOpacity(0.5)
           ),
-              scaffoldBackgroundColor: Colors.white,
+              scaffoldBackgroundColor: Color(0xffF9F9F9),
              appBarTheme:const AppBarTheme(
              // backgroundColor: Colors.orange
              )

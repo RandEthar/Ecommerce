@@ -1,9 +1,11 @@
+import 'package:ecommerce_app/core/services/auth.dart';
 import 'package:ecommerce_app/core/utils/app_styles.dart';
 import 'package:ecommerce_app/core/utils/constants.dart';
 import 'package:ecommerce_app/core/utils/shared_pref.dart';
 
 import 'package:ecommerce_app/views/on_bording/on_bording_screen.dart';
 import 'package:ecommerce_app/views/screens/signin_screen.dart';
+import 'package:ecommerce_app/views/widgets/home/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -40,14 +42,15 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
     navigateToOnBoardingScreen();
   }
 
-  Future<void> navigateToOnBoardingScreen() {
+  Future<void> navigateToOnBoardingScreen() async{
     bool isOpendApp=SharedPref.getbool(isUserOpenedApp);
-  
+   bool isLoagedIn=await     AuthImpl().isCurrentUserLoagedIn();
     return Future.delayed(
       const Duration(seconds: 4),
       () {
         if (mounted) {
-          Navigator.pushReplacementNamed(context, isOpendApp?SigninScreen.routeName:OnBordingScreen.routeName);
+          Navigator.pushReplacementNamed(context, isOpendApp?
+        (isLoagedIn?HomeScreen.routename: SigninScreen.routeName):OnBordingScreen.routeName);
         }
       },
     );

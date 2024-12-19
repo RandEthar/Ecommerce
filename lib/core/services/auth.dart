@@ -1,32 +1,41 @@
 
 
+import 'package:ecommerce_app/core/services/firestore_services.dart';
+import 'package:ecommerce_app/core/utils/api_endpoints.dart';
+import 'package:ecommerce_app/models/signup_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class Auth {
   Future<void> signUpWithEmailAndPassword({
     required String email,
     required String password,
+      required String name,
   });
   Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
   });
-
+  Future<bool> isCurrentUserLoagedIn();
 
 
 }
 
 class AuthImpl implements Auth {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    FirestoreService firestoreService= FirestoreService.instance;
   @override
   Future<void> signUpWithEmailAndPassword({
     required String email,
     required String password,
+     required String name,
   }) async {
     try {
-      await firebaseAuth.createUserWithEmailAndPassword(
+     var user=await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
+      );
+      var siginupModel=SignupModel(email:email, name:name, uid:user.user!.uid);
+      await firestoreService.setData(path:ApiEndpoints.users(user.user!.uid), data:siginupModel.ToMap()
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -60,5 +69,10 @@ await firebaseAuth.signInWithEmailAndPassword(
 }catch(e){
   throw(e.toString());
 }
+  }
+  
+  @override
+  Future<bool> isCurrentUserLoagedIn() async{
+    return firebaseAuth.currentUser!=null;
   }
 }

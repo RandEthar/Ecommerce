@@ -1,7 +1,7 @@
 import 'package:ecommerce_app/core/utils/app_styles.dart';
 import 'package:ecommerce_app/core/utils/constants.dart';
 import 'package:ecommerce_app/core/utils/font_weight_helper.dart';
-import 'package:ecommerce_app/core/utils/widgets/custom_button.dart';
+import 'package:ecommerce_app/core/utils/custom_button.dart';
 import 'package:ecommerce_app/logic/signin/signin_cubit.dart';
 import 'package:ecommerce_app/views/screens/siginup_screen.dart';
 import 'package:ecommerce_app/views/widgets/create_an_account.dart';
