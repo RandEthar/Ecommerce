@@ -1,10 +1,9 @@
-
-
-
 import 'package:ecommerce_app/core/utils/widgets/clothes.dart';
+import 'package:ecommerce_app/cubit/favorite_cubit.dart';
 import 'package:ecommerce_app/views/widgets/home/widget/listview_item_clothes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ListViewClothes extends StatefulWidget {
@@ -20,22 +19,27 @@ class _ListViewClothesState extends State<ListViewClothes> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Stack(
         children: [
           SizedBox(
             height: 241.h,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: listClothes.length,
-              itemBuilder:(context,index){
-             return Padding(
-               padding:  EdgeInsets.only(right:8.w),
-               child:  ListviewItemClothes(itemClothes:listClothes[index] ,),
-             );
-            }),
+                scrollDirection: Axis.horizontal,
+                itemCount: listClothes.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(right: 8.w),
+                    child: BlocProvider(
+                      create: (context) => FavoriteCubit(),
+                      child: ListviewItemClothes(
+                        itemClothes: listClothes[index],
+                      ),
+                    ),
+                  );
+                }),
           ),
-        /* Positioned(
+          /* Positioned(
           left: 303,right:16 ,bottom: 101,
            child:Container(
   width: 40,

@@ -3,6 +3,7 @@
 
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_styles.dart';
+import 'package:ecommerce_app/views/widgets/bottom_nav_bar.dart';
 import 'package:ecommerce_app/views/widgets/home/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +54,7 @@ class WelcomeScreenBody extends StatelessWidget {
                   ),
                   
                   onPressed:(){
-                      Navigator.pushReplacementNamed(context,HomeScreen.routename);
+                      Navigator.pushReplacementNamed(context,BottomNavBar.routeName);
 
 
                   }, child: Text("Get Started",

@@ -12,6 +12,10 @@ class AppStyles {
   static TextStyle Libre_Caslon_Text18Bold=GoogleFonts.libreCaslonText(
     fontWeight: FontWieghtHelper.bold,fontSize: 18,color: Color(0xff4392F9)
    );
+   static TextStyle roboto12medium=GoogleFonts.roboto(
+  fontWeight: FontWieghtHelper.medium,
+   fontSize: 12.sp,color:  AppColors.primary
+  );
   static TextStyle libreCaslonText40Bold=GoogleFonts.libreCaslonText(
   fontWeight: FontWieghtHelper.bold,
    fontSize: 40.sp,color:  AppColors.primary

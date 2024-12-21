@@ -3,9 +3,7 @@ import 'package:ecommerce_app/core/utils/constants.dart';
 import 'package:ecommerce_app/views/widgets/home/widget/all_featured_rows.dart';
 import 'package:ecommerce_app/views/widgets/home/widget/list_view_clothes.dart';
 import 'package:ecommerce_app/views/widgets/home/widget/list_view_featured_item.dart';
-import 'package:ecommerce_app/views/widgets/home/widget/listview_item_clothes.dart';
 import 'package:ecommerce_app/views/widgets/home/widget/page_view_item_home.dart';
-import 'package:ecommerce_app/views/widgets/home/widget/page_view_shopping.dart';
 import 'package:ecommerce_app/views/widgets/home/widget/search_home_field.dart';
 import 'package:ecommerce_app/views/widgets/home/widget/timer_counter.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +95,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
           ),
            Image.asset(
              "assets/images/close-up-woman-holding-shopping-bags.jpg",
-             fit: BoxFit.cover, // ملء الإطار بشكل متناسق
+             fit: BoxFit.cover, 
            )
         ],),
   )*/
@@ -141,7 +139,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
                 child: Image.asset(
                   width: MediaQuery.of(context).size.width,
                   "assets/images/close-up-woman-holding-shopping-bags.jpg",
-                  fit: BoxFit.cover, // ملء الإطار بشكل متناسق
+                  fit: BoxFit.cover, 
                 ),
               ),
             )

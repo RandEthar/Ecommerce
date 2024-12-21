@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/logic/cubit/forgetpassword_cubit.dart';
+
 import 'package:ecommerce_app/logic/signin/signin_cubit.dart';
 import 'package:ecommerce_app/logic/signup/siginup_cubit.dart';
 import 'package:ecommerce_app/views/get_start_screen.dart';
@@ -9,7 +9,9 @@ import 'package:ecommerce_app/views/screens/siginup_screen.dart';
 import 'package:ecommerce_app/views/screens/signin_screen.dart';
 import 'package:ecommerce_app/views/splash/splash_screen.dart';
 import 'package:ecommerce_app/views/welcome/screen/welcome_screen.dart';
+import 'package:ecommerce_app/views/widgets/bottom_nav_bar.dart';
 import 'package:ecommerce_app/views/widgets/home/screen/home_screen.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,10 +23,12 @@ class AppRouter {
       //ForgetPasswordScreen
       case ForgetPasswordScreen.routeName:
         return MaterialPageRoute(builder: (_) {
-          return BlocProvider(
-            create: (context) => ForgetpasswordCubitCubit(),
-            child: const ForgetPasswordScreen(),
-          );
+          return const ForgetPasswordScreen();
+        });
+        //BottomNavBar
+        case BottomNavBar.routeName:
+        return MaterialPageRoute(builder: (_) {
+          return const BottomNavBar();
         });
       case HomeScreen.routename:
         return MaterialPageRoute(builder: (_) {

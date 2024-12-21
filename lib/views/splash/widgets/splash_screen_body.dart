@@ -5,6 +5,7 @@ import 'package:ecommerce_app/core/utils/shared_pref.dart';
 
 import 'package:ecommerce_app/views/on_bording/on_bording_screen.dart';
 import 'package:ecommerce_app/views/screens/signin_screen.dart';
+import 'package:ecommerce_app/views/widgets/bottom_nav_bar.dart';
 import 'package:ecommerce_app/views/widgets/home/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +51,7 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
       () {
         if (mounted) {
           Navigator.pushReplacementNamed(context, isOpendApp?
-        (isLoagedIn?HomeScreen.routename: SigninScreen.routeName):OnBordingScreen.routeName);
+        (isLoagedIn?BottomNavBar.routeName: SigninScreen.routeName):OnBordingScreen.routeName);
         }
       },
     );
