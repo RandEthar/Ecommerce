@@ -1,6 +1,6 @@
 
 
-import 'package:ecommerce_app/core/utils/app_styles.dart';
+
 import 'package:ecommerce_app/models/featured_item_model.dart';
 import 'package:ecommerce_app/views/widgets/home/widget/featured_list_view_item.dart';
 import 'package:flutter/material.dart';

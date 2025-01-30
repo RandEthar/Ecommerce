@@ -1,15 +1,18 @@
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_styles.dart';
 import 'package:ecommerce_app/core/utils/constants.dart';
-import 'package:ecommerce_app/core/utils/widgets/clothes.dart';
-import 'package:ecommerce_app/cubit/favorite_cubit.dart';
+import 'package:ecommerce_app/core/utils/widgets/product_item_model.dart';
+import 'package:ecommerce_app/core/utils/widgets/stars.dart';
+import 'package:ecommerce_app/views/widgets/home/logic/cubit/home_cubit.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ListviewItemClothes extends StatelessWidget {
   const ListviewItemClothes({super.key, required this.itemClothes});
-  final Clothes itemClothes;
+  final ProductItemModel itemClothes;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +24,19 @@ class ListviewItemClothes extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(4.r),
-            child:
-                Image.asset(height: 124.h, width: 170.w, itemClothes.pathImage),
+            child: Image.network(
+              itemClothes.pathImage,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+              height: 124.h,
+              width: 170.w,
+              fit: BoxFit.fill,
+            ),
           ),
           verticalSpace(8),
           Padding(
@@ -31,30 +45,28 @@ class ListviewItemClothes extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  itemClothes.text,
+                  itemClothes.titel,
                   style: AppStyles.montserrat12medium
                       .copyWith(color: Colors.black),
                 ),
                 verticalSpace(4),
                 Text(
                   overflow: TextOverflow.ellipsis,
-                  itemClothes.text2,
+                  itemClothes.description,
                   style: AppStyles.montserrat12medium
                       .copyWith(color: Colors.black, fontSize: 10),
                 ),
                 verticalSpace(4),
-                //₹1500
                 Text(
-                  itemClothes.newprice,
+                  "₹ ${(itemClothes.price - (itemClothes.price * (itemClothes.discount / 100))).toInt()}",
                   style: AppStyles.montserrat12medium
                       .copyWith(color: Colors.black),
                 ),
                 verticalSpace(4),
-                //₹1500
                 Row(
                   children: [
                     Text(
-                      itemClothes.oldprice,
+                      "₹ ${itemClothes.price}",
                       style: AppStyles.montserrat12medium.copyWith(
                         color: const Color(0xffBBBBBB),
                         decoration: TextDecoration.lineThrough,
@@ -66,7 +78,7 @@ class ListviewItemClothes extends StatelessWidget {
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: itemClothes.rival,
+                            text: "${itemClothes.discount}",
                             style: AppStyles.montserrat12medium
                                 .copyWith(fontSize: 10, color: Colors.red),
                           ),
@@ -86,23 +98,12 @@ class ListviewItemClothes extends StatelessWidget {
                 horizontalSpace(4),
                 Row(
                   children: [
-                    Row(
-                      children: List.generate(4, (index) {
-                        return const Icon(
-                            size: 14, color: Color(0xffEDB310), Icons.star);
-                      }),
-                    ),
-                    Row(
-                      children: List.generate(1, (index) {
-                        return const Icon(
-                            size: 14,
-                            color: Color(0xffBBBBBB),
-                            Icons.star_half);
-                      }),
+                    const Stars(
+                      size_star: 14,
                     ),
                     horizontalSpace(4),
                     Text(
-                      itemClothes.evaluation,
+                      "${itemClothes.rating}",
                       style: AppStyles.montserrat12medium.copyWith(
                         color: const Color(0xffBBBBBB),
                         decoration: TextDecoration.lineThrough,
@@ -110,26 +111,29 @@ class ListviewItemClothes extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                   Padding(
-                      padding: EdgeInsets.only(bottom: 8, right: 15),
-                      child: SizedBox(
-                        height: 12,
-                        width: 12,
-                        child: BlocBuilder<FavoriteCubit, FavoriteState>(
-                          builder: (context, state) {
-                            return InkWell(
-                              onTap: (){
-                                context.read<FavoriteCubit>().funChange();
+                    BlocBuilder<HomeCubit, HomeState>(
+                      buildWhen: (previous, current) => current is FavoriteChangedSuccsess,
+                      builder: (context, state) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 8, right: 15),
+                          child: SizedBox(
+                            height: 12,
+                            width: 12,
+                            child: InkWell(
+                              onTap: () {
+                                context
+                                    .read<HomeCubit>()
+                                    .toggleFavorite(itemClothes);
                               },
                               child: Icon(
-                               state is FavoriteMarked? Icons.favorite
-                              :  Icons.favorite_border_outlined,
+                                context.read<HomeCubit>().isFav(itemClothes)?Icons.favorite:
+                                Icons.favorite_border_outlined,
                                 color: AppColors.primary,
                               ),
-                            );
-                          },
-                        ),
-                      ),
+                            ),
+                          ),
+                        );
+                      },
                     )
                   ],
                 ),

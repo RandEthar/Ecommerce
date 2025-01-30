@@ -1,10 +1,12 @@
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_styles.dart';
 import 'package:ecommerce_app/core/utils/custom_button.dart';
+import 'package:ecommerce_app/views/screens/forget_password/logic/cubit/forget_password_cubit.dart';
 
 import 'package:ecommerce_app/views/widgets/custom_text_form_fild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ForgetPasswordBody extends StatelessWidget {
@@ -21,8 +23,9 @@ class ForgetPasswordBody extends StatelessWidget {
         SizedBox(height: 63.h,),
           Text("Forgot\npassword?",style: AppStyles.montserrat36Bold,)
        ,SizedBox(height: 32.h,),
-      /* CustomTextFormFild(hint: 'Enter your email address',
-        prefixIcon:"assets/svgs/Mail.svg", controller: context.read<ForgetpasswordCubitCubit>().emailController)*/
+       CustomTextFormFild(hint: 'Enter your email address',
+        prefixIcon:"assets/svgs/Mail.svg", 
+        controller: context.read<ForgetPasswordCubit>().forget_password),
       SizedBox(height: 26.h,),
       Row(children: [
         Text("*",style: AppStyles.montserrat12regular.copyWith(color: AppColors.primary),),
@@ -34,7 +37,7 @@ class ForgetPasswordBody extends StatelessWidget {
       SizedBox(height: 26.h,),
     CustomButton(
       onPressed: () {
-        
+        context.read<ForgetPasswordCubit>().resetPassword;
       },
       title: "Submit",),
          

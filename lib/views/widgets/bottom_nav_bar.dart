@@ -1,14 +1,18 @@
-
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_styles.dart';
 
 import 'package:ecommerce_app/views/widgets/Search/Screen/search_screen.dart';
 import 'package:ecommerce_app/views/widgets/Setting/Screen/Setting_screen.dart';
+import 'package:ecommerce_app/views/widgets/Shop/Screen/shop_screen.dart';
+import 'package:ecommerce_app/views/widgets/Shop/logic/cubit/shop_cubit.dart';
 
 import 'package:ecommerce_app/views/widgets/Wishlist/Screen/wishlist_screen.dart';
+import 'package:ecommerce_app/views/widgets/cart/cart_screen.dart';
+import 'package:ecommerce_app/views/widgets/home/logic/cubit/home_cubit.dart';
 import 'package:ecommerce_app/views/widgets/home/screen/home_screen.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -23,11 +27,16 @@ class BottomNavBar extends StatefulWidget {
 
 class _HomeScreenState extends State<BottomNavBar> {
   int currentIndex = 0;
-  List<Widget> screen = const [
-    HomeScreen(),
-    WishlistScreen(),
-    SearchScreen(),
-    SettingScreen()
+  List<Widget> screen = [
+    BlocProvider(
+      create: (context) => HomeCubit(),
+      child:const HomeScreen(),
+    ),
+    const WishlistScreen(),
+   const SearchScreen(),
+   const SettingScreen(),
+   const CartScreen()
+
   ];
   List<String> icons = const [
     "assets/svgs/home.svg",
@@ -59,7 +68,11 @@ class _HomeScreenState extends State<BottomNavBar> {
         child: FloatingActionButton(
           backgroundColor: Colors.white,
           shape: const CircleBorder(),
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              currentIndex = 4;
+            });
+          },
           child: SvgPicture.asset(
             "assets/svgs/shopping-cart 2.svg",
             width: 24,
@@ -74,39 +87,41 @@ class _HomeScreenState extends State<BottomNavBar> {
         //shape: CircularNotchedRectangle(),
         //   notchMargin: 10,
 
-       
         color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
             icons.length,
             (index) {
-             bool isSelected=currentIndex==index;
+              bool isSelected = currentIndex == index;
               return InkWell(
-              onTap: () {
-                setState(() {
-                  currentIndex=index;
-                });
-              },
+                onTap: () {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                   AnimatedContainer(
-                         duration: const Duration(milliseconds: 300),
-                         curve: Curves.bounceOut,
-                      child: SvgPicture.asset(icons[index],height:isSelected?28: 24,width:isSelected?28: 24, color: isSelected?AppColors.primary:Colors.black)), // ثابت
+                    AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.bounceOut,
+                        child: SvgPicture.asset(icons[index],
+                            height: isSelected ? 28 : 24,
+                            width: isSelected ? 28 : 24,
+                            color: isSelected
+                                ? AppColors.primary
+                                : Colors.black)), // ثابت
                     const SizedBox(height: 4), // ثابت
                     AnimatedDefaultTextStyle(
-                        duration: const Duration(milliseconds: 300),
-                         curve: Curves.bounceOut,
-                       style: AppStyles
-                          .roboto12medium.copyWith(
-                              fontSize: isSelected ? 14.sp : 12.sp,
-                            color: isSelected?AppColors.primary:Colors.black
-                          ), //
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.bounceOut,
+                      style: AppStyles.roboto12medium.copyWith(
+                          fontSize: isSelected ? 14.sp : 12.sp,
+                          color:
+                              isSelected ? AppColors.primary : Colors.black), //
                       child: Text(
                         labels[index],
-                      
                       ),
                     ),
                   ],
